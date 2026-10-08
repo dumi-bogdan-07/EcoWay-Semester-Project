@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\FirstSemesterProject.csproj": {}
+    "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\EcoWay-Semester-Project\\FirstSemesterProject.csproj": {}
   },
   "projects": {
-    "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\FirstSemesterProject.csproj": {
+    "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\EcoWay-Semester-Project\\FirstSemesterProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\FirstSemesterProject.csproj",
+        "projectUniqueName": "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\EcoWay-Semester-Project\\FirstSemesterProject.csproj",
         "projectName": "FirstSemesterProject",
-        "projectPath": "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\FirstSemesterProject.csproj",
+        "projectPath": "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\EcoWay-Semester-Project\\FirstSemesterProject.csproj",
         "packagesPath": "C:\\Users\\Gaming.DESKTOP-EG3NMBR\\.nuget\\packages\\",
-        "outputPath": "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\obj\\",
+        "outputPath": "D:\\Folder Universitate\\Danemarca\\FirstSemesterProject\\EcoWay-Semester-Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

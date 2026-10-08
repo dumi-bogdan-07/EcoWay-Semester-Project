@@ -1,0 +1,5 @@
+D:\Folder Universitate\Danemarca\FirstSemesterProject\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.GeneratedMSBuildEditorConfig.editorconfig
+D:\Folder Universitate\Danemarca\FirstSemesterProject\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.AssemblyInfoInputs.cache
+D:\Folder Universitate\Danemarca\FirstSemesterProject\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.AssemblyInfo.cs
+D:\Folder Universitate\Danemarca\FirstSemesterProject\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.csproj.CoreCompileInputs.cache
+D:\Folder Universitate\Danemarca\FirstSemesterProject\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.sourcelink.json
