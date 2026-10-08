@@ -1,1 +1,3 @@
-﻿Console.WriteLine("Hello, World!");
+﻿class Bus {
+    public double avgSpeed = 0;
+}
