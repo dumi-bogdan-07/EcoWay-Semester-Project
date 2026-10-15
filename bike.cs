@@ -1,1 +1,4 @@
-﻿Console.WriteLine("Hello, World!");
+﻿public class Bike
+{
+    public double AvgSpeed { get; set; } = 0;
+}

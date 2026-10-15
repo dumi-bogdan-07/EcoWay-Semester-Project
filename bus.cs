@@ -1,3 +1,4 @@
-﻿class Bus {
-    public double avgSpeed = 0;
+﻿public class Bus
+{
+    public double AvgSpeed { get; set; } = 0;
 }
