@@ -84,7 +84,7 @@ public class RouteInputProcessor
 
                 string userInput = Console.ReadLine()?.Trim().ToLower() ?? "";
 
-                if (validModes.Contains(userInput))
+                if (validModes.Contains(userInput) && !chosenModes.Contains(userInput))
                 {
                     chosenModes[i] = userInput;
                     break;
