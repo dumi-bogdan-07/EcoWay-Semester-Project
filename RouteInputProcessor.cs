@@ -7,7 +7,7 @@ public class RouteInputProcessor
     {
         while (true)
         {
-            Console.WriteLine("Please input distance (in kms): ");
+            Console.WriteLine("Please input distance (in kms) from 0 to 50: ");
 
             try // check if the input is a valid double, if not, catch the exception and prompt user to try again
             {
@@ -15,7 +15,7 @@ public class RouteInputProcessor
                 // this whole try catch method can be simplified by using TryParse... but Amir hasn't taught that yet!
 
                 double input = double.Parse(Console.ReadLine() ?? "");
-                if (input <= 0)     // check if input is negative
+                if (input <= 0 || input > 50)     // check if input is negative
                 {
                     Console.WriteLine("Please enter an actual distance");
                     continue;   // ...and if it is, prompt user to try again with different input

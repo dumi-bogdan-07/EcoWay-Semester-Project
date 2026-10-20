@@ -23,3 +23,18 @@ C:\Users\NOSHT\AppData\Local\Temp\EcoWayBuild\output\FirstSemesterProject.deps.j
 C:\Users\NOSHT\AppData\Local\Temp\EcoWayBuild\output\FirstSemesterProject.runtimeconfig.json
 C:\Users\NOSHT\AppData\Local\Temp\EcoWayBuild\output\FirstSemesterProject.dll
 C:\Users\NOSHT\AppData\Local\Temp\EcoWayBuild\output\FirstSemesterProject.pdb
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.AssemblyInfoInputs.cache
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.AssemblyInfo.cs
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.csproj.CoreCompileInputs.cache
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.sourcelink.json
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.dll
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\refint\FirstSemesterProject.dll
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.pdb
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\bin\Debug\net10.0\FirstSemesterProject.exe
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\bin\Debug\net10.0\FirstSemesterProject.deps.json
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\bin\Debug\net10.0\FirstSemesterProject.runtimeconfig.json
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\bin\Debug\net10.0\FirstSemesterProject.dll
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\bin\Debug\net10.0\FirstSemesterProject.pdb
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\FirstSemesterProject.genruntimeconfig.cache
+C:\Users\Marchello\Desktop\Semester Project\EcoWay-Semester-Project\obj\Debug\net10.0\ref\FirstSemesterProject.dll

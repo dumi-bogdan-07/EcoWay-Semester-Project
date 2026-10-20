@@ -8,6 +8,7 @@ class Bike {
 
     public Bike(double km){
         time = km / avgSpeed; // It calls upon the imputed distance from the Main file.
+        totalCO2Emission = 0;
     }
 
     // Should there be a need for methods, they will be implemented later.   
