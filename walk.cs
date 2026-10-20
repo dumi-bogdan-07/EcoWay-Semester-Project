@@ -8,7 +8,7 @@ class Walk {
 
     public Walk(double km) {
         time = km / avgSpeed;
-        totalCO2Emission = 0
+        totalCO2Emission = 0;
     }
 }
 
