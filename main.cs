@@ -39,7 +39,6 @@ public class Program
 
     private static bool Continue()
     {
-        // Loop to He's backhe'sscared yeah uhwait letme letmesharemyscreen for somereasonJ is superbroken forme by thewayI likeevery timeIcoverevery timeIcover over something likeI don't know how to experimentmaybesharemyscreen okay nowI can'tI can't like okayevery timeIhover over something like you see how thehoverablesticks likeitdoesn't disappearI don't knowwhyitdoes that yeahwait nowI can't clickit because of thefuckinghover thingit'ssoannoying okayI thinkI have to changemybrowser yeah uhwakemeI haveafilterfilter how thefuturefilter can you okay perfect these four these four yeah
         while (true) { 
             Console.WriteLine("Would you like to do another comparison?");
             string answer = Console.ReadLine()?.Trim().ToLower() ?? "";
