@@ -15,28 +15,37 @@ public class Program
             string[] chosenModes = RouteInputProcessor.GetValidTransportMode();
 
             // The transport modes selected by the user are stored in a list called chosenModes
-
-            for (int i = 0; i < chosenModes.Length; i++)    // Printing every transport mode selected by the user
-            {
-                // Console.Write(chosenModes[i] + " ");
-                if (chosenModes[i] == "car"){
-                    Car car = new Car(distance);
-                    Console.WriteLine($"Car: {car.time:0.00} hours | {car.totalCO2Emission:0.00} CO2");
-                } else if(chosenModes[i] == "bike"){
-                    Bike bike = new Bike(distance);
-                    Console.WriteLine($"Bike: {bike.time:0.00} hours | {bike.totalCO2Emission:0.00} CO2");
-                } else if(chosenModes[i] == "bus"){
-                    Bus bus = new Bus(distance);
-                    Console.WriteLine($"Bus: {bus.time:0.00} hours | {bus.totalCO2Emission:0.00} CO2");
-                } else{
-                    Walk walk = new Walk(distance);
-                    Console.WriteLine($"Walk: {walk.time:0.00} hours | {walk.totalCO2Emission:0.00} CO2");
-                }
-            }
+            Program.GetTransportComparison(distance, chosenModes);
         }
         while (Continue());
     }
 
+    public static void GetTransportComparison(double distance_val, string[] chosenModes_val){
+        foreach(string transport in chosenModes_val){
+            double time = 0;
+            double emissions = 0;
+            switch(transport){
+                case "walk": Walk WalkObj = new Walk(distance_val);
+                    time = WalkObj.time;
+                    emissions = WalkObj.totalCO2Emission;
+                    break;
+                case "bus": Bus BusObj = new Bus(distance_val);
+                    time = BusObj.time;
+                    emissions = BusObj.totalCO2Emission;
+                    break;
+                case "bike": Bike BikeObj = new Bike(distance_val);
+                    time = BikeObj.time;
+                    emissions = BikeObj.totalCO2Emission;
+                    break;
+                case "car": Car CarObj = new Car(distance_val);
+                    time = CarObj.time;
+                    emissions = CarObj.totalCO2Emission;
+                    break;
+            }
+            Console.WriteLine($"{transport}: {time:0.00} hours | {emissions:0.00} CO2");
+        }
+    }
+    
     private static bool Continue()
     {
         while (true) { 
