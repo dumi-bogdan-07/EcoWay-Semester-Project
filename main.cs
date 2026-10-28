@@ -42,7 +42,16 @@ public class Program
                     emissions = CarObj.totalCO2Emission;
                     break;
             }
-            Console.WriteLine($"{transport}: {time:0.00} hours | {emissions:0.00} CO2");
+            int totalMinutes = (int)Math.Round(time*60);
+            int hours = totalMinutes / 60;
+            int minutes = totalMinutes % 60;
+            string timeFormatted;
+            if(hours > 0){
+                timeFormatted = $"{hours}h {minutes} mins";
+            } else{
+                timeFormatted = $"{minutes} mins";
+            }
+            Console.WriteLine($"{transport}: {timeFormatted}| {emissions:0.00} CO2");
         }
     }
     
