@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marchello\\Desktop\\Semester Project\\EcoWay-Semester-Project\\FirstSemesterProject.csproj": {}
+    "C:\\Users\\NOSHT\\Documents\\!!! UNI\\EcoWay\\EcoWay-Semester-Project\\FirstSemesterProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marchello\\Desktop\\Semester Project\\EcoWay-Semester-Project\\FirstSemesterProject.csproj": {
+    "C:\\Users\\NOSHT\\Documents\\!!! UNI\\EcoWay\\EcoWay-Semester-Project\\FirstSemesterProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marchello\\Desktop\\Semester Project\\EcoWay-Semester-Project\\FirstSemesterProject.csproj",
+        "projectUniqueName": "C:\\Users\\NOSHT\\Documents\\!!! UNI\\EcoWay\\EcoWay-Semester-Project\\FirstSemesterProject.csproj",
         "projectName": "FirstSemesterProject",
-        "projectPath": "C:\\Users\\Marchello\\Desktop\\Semester Project\\EcoWay-Semester-Project\\FirstSemesterProject.csproj",
-        "packagesPath": "C:\\Users\\Marchello\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marchello\\Desktop\\Semester Project\\EcoWay-Semester-Project\\obj\\",
+        "projectPath": "C:\\Users\\NOSHT\\Documents\\!!! UNI\\EcoWay\\EcoWay-Semester-Project\\FirstSemesterProject.csproj",
+        "packagesPath": "C:\\Users\\NOSHT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NOSHT\\Documents\\!!! UNI\\EcoWay\\EcoWay-Semester-Project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Marchello\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\NOSHT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -61,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Xml.Serialization;
 
 public class RouteInputProcessor
 {
@@ -17,7 +18,7 @@ public class RouteInputProcessor
                 double input = double.Parse(Console.ReadLine() ?? "");
                 if (input <= 0 || input > 50)     // check if input is negative
                 {
-                    Console.WriteLine("Please enter an actual distance");
+                    Console.WriteLine("Please enter a distance between 0 and 50 km.");
                     continue;   // ...and if it is, prompt user to try again with different input
                 }
 
@@ -26,10 +27,6 @@ public class RouteInputProcessor
             catch (FormatException)
             {
                 Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-            catch (OverflowException)
-            {
-                Console.WriteLine("The number you entered is too large. Please enter a smaller value.");
             }
         }
     }
@@ -96,5 +93,27 @@ public class RouteInputProcessor
         }
 
         return chosenModes;
+    }
+
+    public static string GetFilter()
+    {
+        string userChoice;
+
+        while (true) // Run a loop until the user selects a valid filter
+        {
+            Console.WriteLine("Please choose the filter you would like to use (co2, time, cost):");
+            string[] validResponses = ["co2", "time", "cost"]; // Initializing a list of valid filters that the user can choose from
+            string userInput = Console.ReadLine()?.Trim().ToLower() ?? "";
+
+            if (validResponses.Contains(userInput))
+            {
+                userChoice = userInput; // Store the selected filter in userChoice
+                break;
+            }
+
+            Console.WriteLine("Invalid filter."); // if the user hasn't selected a valid filter, write this out and run the loop again
+        }
+        
+        return userChoice;
     }
 }
