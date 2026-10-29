@@ -12,7 +12,7 @@ class Bus {
 
     public Bus(double km){
         time = km / avgSpeed; // It calls upon the imputed distance from the Main file.
-        totalCO2Emission = km * CO2Emission; // It does the CO2 output of a trip, based on the inputed kilometers from Main. 
+        totalCO2Emission = (km * CO2Emission) / 55; // It does the CO2 output of a trip, based on the inputed kilometers from Main. Division by 55 is to account for personal footprint, not the entire bus.
 
         if (km <= 7)
         {
