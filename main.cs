@@ -39,33 +39,40 @@ public class Program
 
     public static void GetTransportComparison(double distance_val, string[] chosenModes_val, string chosenFilter){
 
+        List<double> priceList = new List<double>();
         List<double> timeList = new List<double>(); // only initialised as List<> so i could use .Add :P
         List<double> emissionsList = new List<double>();
         List<string> transportList = new List<string>();
 
         double lowestTime = Double.MaxValue;
         double lowestEmissions = double.MaxValue;
+        double lowestCost = Double.MaxValue;
 
         foreach(string transport in chosenModes_val){
             double time = 0;
             double emissions = 0;
+            double price = 0;
 
             switch(transport){
                 case "walk": Walk WalkObj = new Walk(distance_val);
                     time = WalkObj.time;
                     emissions = WalkObj.totalCO2Emission;
+                    price = WalkObj.tripPrice;
                     break;
                 case "bus": Bus BusObj = new Bus(distance_val);
                     time = BusObj.time;
                     emissions = BusObj.totalCO2Emission;
+                    price = BusObj.tripPrice;
                     break;
                 case "bike": Bike BikeObj = new Bike(distance_val);
                     time = BikeObj.time;
-                    emissions = BikeObj.totalCO2Emission;          
+                    emissions = BikeObj.totalCO2Emission;     
+                    price = BikeObj.tripPrice;    
                     break;
                 case "car": Car CarObj = new Car(distance_val);
                     time = CarObj.time;
                     emissions = CarObj.totalCO2Emission;
+                    price = CarObj.tripPrice;
                     break;
             }
 
@@ -73,7 +80,9 @@ public class Program
             timeList.Add(time);
             emissionsList.Add(emissions);
             transportList.Add(transport);
-            Console.WriteLine($"{transport}: {DoTimeFormatting(time)}| {emissions:0.00} CO2");
+            priceList.Add(price);
+
+            Console.WriteLine($"{transport}: {DoTimeFormatting(time)}| Emissions: {emissions:0.00} m³/km | Price: {price:0.00} DKK");
         }
         
         // Filter checks
@@ -92,7 +101,7 @@ public class Program
                     }
                 }
 
-                Console.WriteLine($"The {transportList[lowestIndex]} method of transport has the lowest emissions at {lowestEmissions:0.00}");
+                Console.WriteLine($"The {transportList[lowestIndex]} method of transport has the lowest emissions at {lowestEmissions:0.00} m³/km");
             }
         else if (chosenFilter == "time")
             {
@@ -109,10 +118,20 @@ public class Program
 
                 Console.WriteLine($"The {transportList[lowestIndex]} method of transport has the fastest time at {DoTimeFormatting(lowestTime)}");
             }
-        else
+        else if (chosenFilter == "cost")
         {
-            // Cost comparison
-            // This will have the same logic as the other 2... Will be implemented after the merge so that we have the costs in main.cs to compare between.
+            int lowestIndex = 0;
+
+            for (int i = 0; i < priceList.Count; i++)
+            {
+                if (priceList[i] <= lowestCost)
+                {
+                    lowestCost = priceList[i];
+                    lowestIndex = i;
+                }
+            }
+
+            Console.WriteLine($"The {transportList[lowestIndex]} method of transport has the lowest cost at {lowestCost} DKK");
         }
     }
     
