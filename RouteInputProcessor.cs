@@ -116,4 +116,13 @@ public class RouteInputProcessor
         
         return userChoice;
     }
+    public static double GetDoubleInput(string prompt){
+        while (true){
+            Console.WriteLine(prompt);
+            if (double.TryParse(Console.ReadLine(), out double result) && result >= 0){
+                return result;
+            }
+            Console.WriteLine("Invalid input. Please enter a valid positive number.");
+            }
+        }
 }

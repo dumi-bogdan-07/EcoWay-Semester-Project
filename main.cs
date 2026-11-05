@@ -1,7 +1,8 @@
-﻿using CarClass;
-using BikeClass;
-using BusClass;
-using WalkClass;
+﻿// using CarClass;
+// using BikeClass;
+// using BusClass;
+// using WalkClass;
+using VehicleClass;
 using System.Formats.Asn1;
 public class Program
 {
@@ -44,32 +45,51 @@ public class Program
         List<double> emissionsList = new List<double>();
         List<string> transportList = new List<string>();
 
-        double lowestTime = Double.MaxValue;
+        double lowestTime = double.MaxValue;
         double lowestEmissions = double.MaxValue;
-        double lowestCost = Double.MaxValue;
+        double lowestCost = double.MaxValue;
 
         foreach(string transport in chosenModes_val){
             double time = 0;
             double emissions = 0;
             double price = 0;
 
+            Console.WriteLine($"\n--- Enter details for {transport} ---");
+
             switch(transport){
-                case "walk": Walk WalkObj = new Walk(distance_val);
+                case "walk": 
+                    double walkSpeed = RouteInputProcessor.GetDoubleInput("Enter average walking speed (km/h):");
+                    Walk WalkObj = new Walk(walkSpeed);
+                    WalkObj.CalculateStuff(distance_val);
                     time = WalkObj.time;
                     emissions = WalkObj.totalCO2Emission;
                     price = WalkObj.tripPrice;
                     break;
-                case "bus": Bus BusObj = new Bus(distance_val);
+                case "bus":
+                    double busSpeed = RouteInputProcessor.GetDoubleInput("Enter average bus speed (km/h):");
+                    double busCo2 = RouteInputProcessor.GetDoubleInput("Enter Bus CO2 emission factor:");
+                    double busPrice = RouteInputProcessor.GetDoubleInput("Enter Bus trip price (DKK):");
+                    Bus BusObj = new Bus(busSpeed, busCo2, busPrice);
+                    BusObj.CalculateStuff(distance_val);
                     time = BusObj.time;
                     emissions = BusObj.totalCO2Emission;
                     price = BusObj.tripPrice;
                     break;
-                case "bike": Bike BikeObj = new Bike(distance_val);
+                case "bike":
+                    double bikeSpeed = RouteInputProcessor.GetDoubleInput("Enter average bike speed (km/h):");
+                    Bike BikeObj = new Bike(bikeSpeed);
+                    BikeObj.CalculateStuff(distance_val);
                     time = BikeObj.time;
                     emissions = BikeObj.totalCO2Emission;     
                     price = BikeObj.tripPrice;    
                     break;
-                case "car": Car CarObj = new Car(distance_val);
+                case "car":
+                    double carSpeed = RouteInputProcessor.GetDoubleInput("Enter average car speed (km/h):");
+                    double carCo2 = RouteInputProcessor.GetDoubleInput("Enter Car CO2 emission per km:");
+                    double carConsumption = RouteInputProcessor.GetDoubleInput("Enter Car average consumption (km/liter):");
+                    double carGasPrice = RouteInputProcessor.GetDoubleInput("Enter average gas price (DKK):");
+                    Car CarObj = new Car(carSpeed, carCo2, carConsumption, carGasPrice);
+                    CarObj.CalculateStuff(distance_val);
                     time = CarObj.time;
                     emissions = CarObj.totalCO2Emission;
                     price = CarObj.tripPrice;
@@ -82,7 +102,11 @@ public class Program
             transportList.Add(transport);
             priceList.Add(price);
 
-            Console.WriteLine($"{transport}: {DoTimeFormatting(time)}| Emissions: {emissions:0.00} m³/km | Price: {price:0.00} DKK");
+        }
+        Console.WriteLine(new string('-', 40));
+        for(int i=0; i<chosenModes_val.Length; i++){
+            Console.WriteLine($"{transportList[i]}: {DoTimeFormatting(timeList[i])}| Emissions: {emissionsList[i]:0.00} m³/km | Price: {priceList[i]:0.00} DKK");
+            Console.WriteLine(new string('-', 40));
         }
         
         // Filter checks
