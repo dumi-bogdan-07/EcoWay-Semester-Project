@@ -16,7 +16,7 @@ public class Program{
         while (Continue());
     }
 
-    public static string DoTimeFormatting(double time){ // Split the time formatting into its own method cause we have to reuse it several times.
+    private static string DoTimeFormatting(double time){ // Split the time formatting into its own method cause we have to reuse it several times.
             int totalMinutes = (int)Math.Round(time*60);
             int hours = totalMinutes / 60;
             int minutes = totalMinutes % 60;
@@ -31,7 +31,7 @@ public class Program{
             }
     }
 
-    public static void GetTransportComparison(double distance_val, string[] chosenModes_val, string chosenFilter){
+    private static void GetTransportComparison(double distance_val, string[] chosenModes_val, string chosenFilter){
 
         // List<string> transportList = new List<string>();
 
@@ -83,7 +83,7 @@ public class Program{
         
     }
 
-    public static Vehicle GetBest_Vehicle(Vehicle[] vehicles, string chosenFilter){
+    private static Vehicle GetBest_Vehicle(Vehicle[] vehicles, string chosenFilter){
         Vehicle bestVehicle = vehicles[0];
         foreach(Vehicle v in vehicles){
             switch(chosenFilter){
@@ -108,7 +108,7 @@ public class Program{
         return bestVehicle;
     }
     
-    public static void PrintFilter(Vehicle bestVehicle, string chosenFilter){
+    private static void PrintFilter(Vehicle bestVehicle, string chosenFilter){
         switch(chosenFilter){
             case "co2":
                 Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest emissions at {bestVehicle.totalCO2Emission:0.00} m³/km");

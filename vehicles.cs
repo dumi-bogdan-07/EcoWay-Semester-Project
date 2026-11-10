@@ -2,11 +2,11 @@ namespace VehicleClass;
 
 public abstract class Vehicle{
     public string? name;
-    public double avgSpeed { get; set; }
+    protected double avgSpeed { get; set; }
     public double time { get; set; }
     public double totalCO2Emission { get; set; }
     public double tripPrice { get; set; }
-    public double CO2Emission { get; set; }
+    protected double CO2Emission { get; set; }
 
     protected Vehicle(double avgSpeed, double CO2Emission, double tripPrice){
         this.avgSpeed = avgSpeed;
@@ -39,8 +39,8 @@ class Walk : Vehicle{
 }
 
 class Car : Vehicle{
-    public double averageGasPrice;
-    public double averageConsumption;
+    private double averageGasPrice;
+    private double averageConsumption;
     
     public Car(double avgSpeed, double CO2Emission, double averageConsumption, double averageGasPrice)
     : base(avgSpeed, CO2Emission, 0){

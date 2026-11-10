@@ -16,13 +16,11 @@ public class RouteInputProcessor
                 // this whole try catch method can be simplified by using TryParse... but Amir hasn't taught that yet!
 
                 double input = double.Parse(Console.ReadLine() ?? "");
-                if (input <= 0 || input > 50)     // check if input is negative
-                {
-                    Console.WriteLine("Please enter a distance between 0 and 50 km.");
-                    continue;   // ...and if it is, prompt user to try again with different input
-                }
+                if (!(input <= 0) && !(input > 50)) return input; // return the input to callers of this method
+                // check if input is negative
+                Console.WriteLine("Please enter a distance between 0 and 50 km.");
+                continue;   // ...and if it is, prompt user to try again with different input
 
-                return input; // return the input to callers of this method
             }
             catch (FormatException)
             {
