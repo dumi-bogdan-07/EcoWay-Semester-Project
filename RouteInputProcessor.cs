@@ -114,6 +114,25 @@ public class RouteInputProcessor
         
         return userChoice;
     }
+    public static bool AskUseDefaultValues()
+    {
+        while (true) // run a loop until the user answers yes or no
+        {
+            Console.WriteLine("Would you like to use the default values? (yes/no)");
+            string answer = Console.ReadLine()?.Trim().ToLower() ?? "";
+
+            if (answer == "yes")
+            {
+                return true; // use the default values from DefaultValues.md
+            }
+            else if (answer == "no")
+            {
+                return false; // the user will enter their own values
+            }
+            Console.WriteLine("Please enter yes or no.");
+        }
+    }
+
     public static double GetDoubleInput(string prompt){
         while (true){
             Console.WriteLine(prompt);

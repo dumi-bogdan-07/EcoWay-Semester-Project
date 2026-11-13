@@ -9,9 +9,10 @@ public class Program{
             double distance = RouteInputProcessor.GetValidDistance();
             string[] chosenModes = RouteInputProcessor.GetValidTransportMode();
             string chosenFilter = RouteInputProcessor.GetFilter();
+            bool useDefaults = RouteInputProcessor.AskUseDefaultValues();
 
             // The transport modes selected by the user are stored in a list called chosenModes
-            Program.GetTransportComparison(distance, chosenModes, chosenFilter);
+            GetTransportComparison(distance, chosenModes, chosenFilter, useDefaults);
         }
         while (Continue());
     }
@@ -31,50 +32,32 @@ public class Program{
             }
     }
 
-    private static void GetTransportComparison(double distance_val, string[] chosenModes_val, string chosenFilter){
-
-        // List<string> transportList = new List<string>();
+    private static void GetTransportComparison(double distance_val, string[] chosenModes_val, string chosenFilter, bool useDefaults){
 
         Vehicle[] vehicles = new Vehicle[chosenModes_val.Length];
 
         for(int i=0; i<chosenModes_val.Length; i++){  
             string transport = chosenModes_val[i];
             
-            Console.WriteLine($"\n--- Enter details for {transport} ---");
-
+            // create a vehicle with its default values
             switch(transport){
-                case "walk": 
-                    double walkSpeed = RouteInputProcessor.GetDoubleInput("Enter average walking speed (km/h):");
-                    vehicles[i] = new Walk(walkSpeed);
-                    break;
-                case "bus":
-                    double busSpeed = RouteInputProcessor.GetDoubleInput("Enter average bus speed (km/h):");
-                    double busCo2 = RouteInputProcessor.GetDoubleInput("Enter Bus CO2 emission factor:");
-                    double busPrice = RouteInputProcessor.GetDoubleInput("Enter Bus trip price (DKK):");
-                    vehicles[i] = new Bus(busSpeed, busCo2, busPrice);
-                    break;
-                case "bike":
-                    double bikeSpeed = RouteInputProcessor.GetDoubleInput("Enter average bike speed (km/h):");
-                    vehicles[i] = new Bike(bikeSpeed);   
-                    break;
-                case "car":
-                    double carSpeed = RouteInputProcessor.GetDoubleInput("Enter average car speed (km/h):");
-                    double carCo2 = RouteInputProcessor.GetDoubleInput("Enter Car CO2 emission per km:");
-                    double carConsumption = RouteInputProcessor.GetDoubleInput("Enter Car average consumption (km/liter):");
-                    double carGasPrice = RouteInputProcessor.GetDoubleInput("Enter average gas price (DKK):");
-                    vehicles[i] = new Car(carSpeed, carCo2, carConsumption, carGasPrice);
-                    break;
+                case "walk": vehicles[i] = new Walk(); break;
+                case "bus":  vehicles[i] = new Bus();  break;
+                case "bike": vehicles[i] = new Bike(); break;
+                case "car":  vehicles[i] = new Car();  break;
+            }
+
+            // if the user wants custom values, each vehicle asks its specific questions
+            if (!useDefaults){
+                Console.WriteLine($"\n--- Enter details for {transport} ---");
+                vehicles[i].GetUserValues();
             }
             
             vehicles[i].CalculateStuff(distance_val);
-            
-            // Every time the foreach loop runs, add the name of the method of transport to its list.
-            // transportList.Add(transport);
-
         }
         Console.WriteLine(new string('-', 40));
         for(int i=0; i<vehicles.Length; i++){
-            Console.WriteLine($"{vehicles[i].name}: {DoTimeFormatting(vehicles[i].time)}| Emissions: {vehicles[i].totalCO2Emission:0.00} m³/km | Price: {vehicles[i].tripPrice:0.00} DKK");
+            Console.WriteLine($"{vehicles[i].name}: {DoTimeFormatting(vehicles[i].time)}| Emissions: {vehicles[i].totalCO2Emission:0.00} kg/km | Price: {vehicles[i].tripPrice:0.00} DKK");
             Console.WriteLine(new string('-', 40));
         }
 
@@ -111,7 +94,7 @@ public class Program{
     private static void PrintFilter(Vehicle bestVehicle, string chosenFilter){
         switch(chosenFilter){
             case "co2":
-                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest emissions at {bestVehicle.totalCO2Emission:0.00} m³/km");
+                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest emissions at {bestVehicle.totalCO2Emission:0.00} kg/km");
                 break;
             case "time":
                 Console.WriteLine($"The {bestVehicle.name} method of transport has the fastest time at {DoTimeFormatting(bestVehicle.time)}");
