@@ -1,0 +1,10 @@
+// It should look something like a dictionary
+// {
+//  "Car" : {
+//    "Speed" : 67,
+//    "Something else" : idk
+//    },
+//  "Something else" : {
+//    "Something" : something
+//    }
+// }
