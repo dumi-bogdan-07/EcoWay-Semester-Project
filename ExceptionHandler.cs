@@ -1,4 +1,4 @@
-public class ExceptionHandler
+public static class ExceptionHandler
 {
     public static double GetDouble(string prompt, double minValue, double maxValue)
     {

@@ -10,14 +10,7 @@ class Bike : Vehicle
     }
 
     // constructor for user values
-    public Bike(double avgSpeed) : base(avgSpeed, 0, 0)
+    public Bike(double avgSpeed) : base("bike", avgSpeed, 0)     // no emissions and free, so it uses Vehicle's default CalculateCO2 and CalculatePrice
     {
-        name = "bike";
-        totalCO2Emission = 0;
-        tripPrice = 0;
-    }
-    public override void CalculateStuff(double km)
-    {
-        time = km / avgSpeed;
     }
 }

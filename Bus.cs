@@ -20,9 +20,8 @@ class Bus : Vehicle
 
     // constructor for user values
     public Bus(double avgSpeed, double CO2Emission, double cityPrice, double intercityPrice)
-    : base(avgSpeed, CO2Emission, 0)
+    : base("bus", avgSpeed, CO2Emission)
     {
-        name = "bus";
         this.cityPrice = cityPrice;
         this.intercityPrice = intercityPrice;
     }
@@ -32,24 +31,24 @@ class Bus : Vehicle
         base.GetUserValues(); // get speed from base class
 
         // get everything else needed
-        CO2Emission = ExceptionHandler.GetDouble("Enter bus CO2 emission for the whole bus (kg/km):", 0, MaxCO2);
-        cityPrice = ExceptionHandler.GetDouble($"Enter city ticket price, for trips up to {CityTripMaxKm} km (DKK):", 0, MaxPrice);
-        intercityPrice = ExceptionHandler.GetDouble($"Enter intercity ticket price, for trips over {CityTripMaxKm} km (DKK):", 0, MaxPrice);
+        CO2Emission = ExceptionHandler.GetDouble($"Enter bus CO2 emission for the whole bus (kg/km, 0-{MaxCO2}):", 0, MaxCO2);
+        cityPrice = ExceptionHandler.GetDouble($"Enter city ticket price, for trips up to {CityTripMaxKm} km (DKK, 0-{MaxPrice}):", 0, MaxPrice);
+        intercityPrice = ExceptionHandler.GetDouble($"Enter intercity ticket price, for trips over {CityTripMaxKm} km (DKK, 0-{MaxPrice}):", 0, MaxPrice);
     }
 
-    public override void CalculateStuff(double km)
+    protected override double CalculateCO2(double km)
     {
-        time = km / avgSpeed;
-        totalCO2Emission = km * CO2Emission / PassengersPerBus;
+        // one passenger's share of the whole bus's emissions
+        return km * CO2Emission / PassengersPerBus;
+    }
 
+    protected override double CalculatePrice(double km)
+    {
         // city ticket for short trips, intercity ticket for longer ones
         if (km <= CityTripMaxKm)
         {
-            tripPrice = cityPrice;
+            return cityPrice;
         }
-        else
-        {
-            tripPrice = intercityPrice;
-        }
+        return intercityPrice;
     }
 }

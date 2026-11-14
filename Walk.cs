@@ -10,14 +10,7 @@ class Walk : Vehicle
     }
 
     // constructor for user values
-    public Walk(double avgSpeed) : base(avgSpeed, 0, 0)
+    public Walk(double avgSpeed) : base("walk", avgSpeed, 0)     // no emissions and free, so it uses Vehicle's default CalculateCO2 and CalculatePrice
     {
-        name = "walk";
-        totalCO2Emission = 0;
-        tripPrice = 0;
-    }
-    public override void CalculateStuff(double km)
-    {
-        time = km / avgSpeed;
     }
 }

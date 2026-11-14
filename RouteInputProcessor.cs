@@ -1,19 +1,21 @@
-public class RouteInputProcessor
+public static class RouteInputProcessor
 {
-    private const double minDistance = 1;
-    private const double maxDistance = 50;
-    private const int minModeCount = 2;
+    private const double MinDistance = 1;
+    private const double MaxDistance = 50;
+    private const int MinModeCount = 2;
+
+    // no MaxModeCount because we have validModes.Length
 
     public static double GetValidDistance()
     {
-        return ExceptionHandler.GetDouble($"Please input a distance in km ({minDistance}-{maxDistance}): ", minDistance, maxDistance);
+        return ExceptionHandler.GetDouble($"Please input a distance in km ({MinDistance}-{MaxDistance}): ", MinDistance, MaxDistance);
     }
 
     public static string[] GetValidTransportMode()
     {
         string[] validModes = ["car", "bike", "bus", "walk"]; // initialization of an array of the accepted modes of transport
 
-        int modeCount = ExceptionHandler.GetInt($"Please enter how many transport modes you want to input ({minModeCount}-{validModes.Length}): ", minModeCount, validModes.Length);
+        int modeCount = ExceptionHandler.GetInt($"Please enter how many transport modes you want to input ({MinModeCount}-{validModes.Length}): ", MinModeCount, validModes.Length);
         // get the user input and store it in modeCount, ExceptionHandler will handle any invalid input
 
         // initialize a new empty array of the modes that will be chosen by the user, with the length of modeCount
@@ -25,7 +27,7 @@ public class RouteInputProcessor
             // Loop until the user inputs a valid mode of transport (one contained in validModes[])
             while (true)
             {
-                Console.WriteLine("Please input a transport mode (car, bike, bus, walk): ");
+                Console.WriteLine($"Please input a transport mode ({string.Join(", ", validModes)}): ");
 
                 // once again if Console.ReadLine() returns null, return an "" instead
                 // .Trim() trims blank spaces, .ToLower() makes sure we can process uppercase input as well.

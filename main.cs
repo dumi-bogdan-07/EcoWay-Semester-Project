@@ -2,9 +2,6 @@
 public class Program{
     public static void Main(){
         do {
-            // Initialization of routeInputProcessor
-            RouteInputProcessor routeInputProcessor = new RouteInputProcessor();
-
             double distance = RouteInputProcessor.GetValidDistance();
             string[] chosenModes = RouteInputProcessor.GetValidTransportMode();
             string chosenFilter = RouteInputProcessor.GetFilter();
@@ -52,11 +49,11 @@ public class Program{
                 vehicles[i].GetUserValues();
             }
             
-            vehicles[i].CalculateStuff(distance_val);
+            vehicles[i].Calculate(distance_val);
         }
         Console.WriteLine(new string('-', 40));
         for(int i=0; i<vehicles.Length; i++){
-            Console.WriteLine($"{vehicles[i].name}: {DoTimeFormatting(vehicles[i].time)}| Emissions: {vehicles[i].totalCO2Emission:0.00} kg. total | Price: {vehicles[i].tripPrice:0.00} DKK");
+            Console.WriteLine($"{vehicles[i].Name}: {DoTimeFormatting(vehicles[i].Time)}| Emissions: {vehicles[i].TotalCO2Emission:0.00} kg total | Price: {vehicles[i].TripPrice:0.00} DKK");
             Console.WriteLine(new string('-', 40));
         }
 
@@ -70,17 +67,17 @@ public class Program{
         foreach(Vehicle v in vehicles){
             switch(chosenFilter){
                 case "co2":
-                    if(v.totalCO2Emission <= bestVehicle.totalCO2Emission){
+                    if(v.TotalCO2Emission <= bestVehicle.TotalCO2Emission){
                         bestVehicle = v;
                     }
                     break;
                 case "time":
-                    if(v.time <= bestVehicle.time){
+                    if(v.Time <= bestVehicle.Time){
                         bestVehicle = v;
                     }
                     break;
                 case "cost":
-                    if(v.tripPrice <= bestVehicle.tripPrice){
+                    if(v.TripPrice <= bestVehicle.TripPrice){
                         bestVehicle = v;
                     }
                     break;
@@ -93,13 +90,13 @@ public class Program{
     private static void PrintFilter(Vehicle bestVehicle, string chosenFilter){
         switch(chosenFilter){
             case "co2":
-                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest emissions at {bestVehicle.totalCO2Emission:0.00} kg in total");
+                Console.WriteLine($"The {bestVehicle.Name} method of transport has the lowest emissions at {bestVehicle.TotalCO2Emission:0.00} kg total");
                 break;
             case "time":
-                Console.WriteLine($"The {bestVehicle.name} method of transport has the fastest time at {DoTimeFormatting(bestVehicle.time)}");
+                Console.WriteLine($"The {bestVehicle.Name} method of transport has the fastest time at {DoTimeFormatting(bestVehicle.Time)}");
                 break;
             case "cost":
-                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest cost at {bestVehicle.tripPrice:0.00} DKK");
+                Console.WriteLine($"The {bestVehicle.Name} method of transport has the lowest cost at {bestVehicle.TripPrice:0.00} DKK");
                 break;
         }
         Console.WriteLine(new string('-', 40));
