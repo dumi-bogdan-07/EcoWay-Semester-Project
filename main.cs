@@ -1,5 +1,4 @@
 ﻿using VehicleClass;
-using System.Formats.Asn1;
 public class Program{
     public static void Main(){
         do {
@@ -57,7 +56,7 @@ public class Program{
         }
         Console.WriteLine(new string('-', 40));
         for(int i=0; i<vehicles.Length; i++){
-            Console.WriteLine($"{vehicles[i].name}: {DoTimeFormatting(vehicles[i].time)}| Emissions: {vehicles[i].totalCO2Emission:0.00} kg/km | Price: {vehicles[i].tripPrice:0.00} DKK");
+            Console.WriteLine($"{vehicles[i].name}: {DoTimeFormatting(vehicles[i].time)}| Emissions: {vehicles[i].totalCO2Emission:0.00} kg. total | Price: {vehicles[i].tripPrice:0.00} DKK");
             Console.WriteLine(new string('-', 40));
         }
 
@@ -94,13 +93,13 @@ public class Program{
     private static void PrintFilter(Vehicle bestVehicle, string chosenFilter){
         switch(chosenFilter){
             case "co2":
-                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest emissions at {bestVehicle.totalCO2Emission:0.00} kg/km");
+                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest emissions at {bestVehicle.totalCO2Emission:0.00} kg in total");
                 break;
             case "time":
                 Console.WriteLine($"The {bestVehicle.name} method of transport has the fastest time at {DoTimeFormatting(bestVehicle.time)}");
                 break;
             case "cost":
-                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest cost at {bestVehicle.tripPrice} DKK");
+                Console.WriteLine($"The {bestVehicle.name} method of transport has the lowest cost at {bestVehicle.tripPrice:0.00} DKK");
                 break;
         }
         Console.WriteLine(new string('-', 40));

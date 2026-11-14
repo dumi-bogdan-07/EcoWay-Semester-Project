@@ -1,68 +1,22 @@
-using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.Xml.Serialization;
-
 public class RouteInputProcessor
 {
+    private const double minDistance = 1;
+    private const double maxDistance = 50;
+    private const int minModeCount = 2;
+
     public static double GetValidDistance()
     {
-        while (true)
-        {
-            Console.WriteLine("Please input distance (in kms) from 0 to 50: ");
-
-            try // check if the input is a valid double, if not, catch the exception and prompt user to try again
-            {
-                // (?? "") means that if Console.ReadLine() returns null, return an empty string ("") instead, so it can be caught by our exceptions
-                // this whole try catch method can be simplified by using TryParse... but Amir hasn't taught that yet!
-
-                double input = double.Parse(Console.ReadLine() ?? "");
-                if (!(input <= 0) && !(input > 50)) return input; // return the input to callers of this method
-                // check if input is negative
-                Console.WriteLine("Please enter a distance between 0 and 50 km.");
-                continue;   // ...and if it is, prompt user to try again with different input
-
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
-        }
+        return ExceptionHandler.GetDouble($"Please input a distance in km ({minDistance}-{maxDistance}): ", minDistance, maxDistance);
     }
 
     public static string[] GetValidTransportMode()
     {
         string[] validModes = ["car", "bike", "bus", "walk"]; // initialization of an array of the accepted modes of transport
-        int modeCount;
 
-        // loop until user inputs a number between 2-4 inclusive 
-        // ...because we need at least 2 modes to compare and at most 4 modes because we only have 4 valid modes
+        int modeCount = ExceptionHandler.GetInt($"Please enter how many transport modes you want to input ({minModeCount}-{validModes.Length}): ", minModeCount, validModes.Length);
+        // get the user input and store it in modeCount, ExceptionHandler will handle any invalid input
 
-        while (true)
-        {
-            Console.WriteLine("Please enter how many transport modes you want to input (2-4): ");
-
-            try // check if the input is a valid integer, if not, catch the exception and prompt user to try again
-            {
-                modeCount = int.Parse(Console.ReadLine() ?? "0");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-                continue;
-            }
-
-            if (modeCount < 2 || modeCount > 4)
-            {
-                Console.WriteLine("Please enter a number between 2 and 4.");
-                continue;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        // initialize a new empty array of the modes that will be chosen by the user, with the length of modeCount (2-4)
+        // initialize a new empty array of the modes that will be chosen by the user, with the length of modeCount
         string[] chosenModes = new string[modeCount];
 
         // Loop modeCount number of times to fill in our chosenModes array
@@ -114,6 +68,7 @@ public class RouteInputProcessor
         
         return userChoice;
     }
+
     public static bool AskUseDefaultValues()
     {
         while (true) // run a loop until the user answers yes or no
@@ -123,7 +78,7 @@ public class RouteInputProcessor
 
             if (answer == "yes")
             {
-                return true; // use the default values from DefaultValues.md
+                return true; // use the default values
             }
             else if (answer == "no")
             {
@@ -132,14 +87,4 @@ public class RouteInputProcessor
             Console.WriteLine("Please enter yes or no.");
         }
     }
-
-    public static double GetDoubleInput(string prompt){
-        while (true){
-            Console.WriteLine(prompt);
-            if (double.TryParse(Console.ReadLine(), out double result) && result >= 0){
-                return result;
-            }
-            Console.WriteLine("Invalid input. Please enter a valid positive number.");
-            }
-        }
 }
