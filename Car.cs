@@ -21,8 +21,8 @@ class Car : Vehicle
     public Car(double avgSpeed, double CO2Emission, double averageConsumption, double averageGasPrice)
     : base("car", avgSpeed, CO2Emission)
     {
-        this.averageGasPrice = averageGasPrice;
-        this.averageConsumption = averageConsumption;
+        this.AverageGasPrice = averageGasPrice;
+        this.AverageConsumption = averageConsumption;
     }
 
     public override void GetUserValues()
@@ -31,8 +31,8 @@ class Car : Vehicle
 
         // get everything else needed
         CO2Emission = ExceptionHandler.GetDouble($"Enter car CO2 emission (kg/km, 0-{MaxCO2}):", 0, MaxCO2);
-        averageConsumption = ExceptionHandler.GetDouble($"Enter car consumption (km/L, {MinConsumption}-{MaxConsumption}):", MinConsumption, MaxConsumption);
-        averageGasPrice = ExceptionHandler.GetDouble($"Enter gas price (DKK/L, 0-{MaxPrice}):", 0, MaxPrice);
+        AverageConsumption = ExceptionHandler.GetDouble($"Enter car consumption (km/L, {MinConsumption}-{MaxConsumption}):", MinConsumption, MaxConsumption);
+        AverageGasPrice = ExceptionHandler.GetDouble($"Enter gas price (DKK/L, 0-{MaxPrice}):", 0, MaxPrice);
     }
 
     protected override double CalculateCO2(double km)
@@ -42,6 +42,6 @@ class Car : Vehicle
 
     protected override double CalculatePrice(double km)
     {
-        return km / averageConsumption * averageGasPrice;
+        return km / AverageConsumption * AverageGasPrice;
     }
 }

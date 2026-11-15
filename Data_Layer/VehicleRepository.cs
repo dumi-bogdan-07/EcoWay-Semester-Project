@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.IO;
-using System.Collection.General;
+using System.Collections.Generic;
 
 namespace Transport.Data{
     public class VehicleDefaultsDto{
@@ -22,7 +22,7 @@ namespace Transport.Data{
 
             string jsonString = File.ReadAllText(FilePath);
 
-            var options = newJsonSerializerOptions {PropertyNameCaseInsensitive = true};
+            var options = new JsonSerializerOptions{PropertyNameCaseInsensitive = true};
             return JsonSerializer.Deserialize<Dictionary<string, VehicleDefaultsDto>>(jsonString, options)
                     ?? new Dictionary<string, VehicleDefaultsDto>();
         }
