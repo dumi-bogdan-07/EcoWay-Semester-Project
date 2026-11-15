@@ -1,0 +1,25 @@
+
+{
+  "Car": {
+    "AvgSpeed": 40,
+    "CO2Emission": 0.15,
+    "averageGasPrice": 18.2,
+    "averageConsumption": 15.8
+  },
+  "Bus": {
+    "AvgSpeed": 30,
+    "CO2Emission": 1.1,
+    "busTicketPriceCity": 20.83,
+    "busTicketPriceIntercity": 32.67
+  },
+  "Bike": {
+    "AvgSpeed": 15,
+    "totalCO2Emission": 0,
+    "tripPrice": 0
+  },
+  "Walk": {
+    "AvgSpeed": 4.5,
+    "CO2Emission": 0,
+    "tripPrice": 0
+  }
+}
