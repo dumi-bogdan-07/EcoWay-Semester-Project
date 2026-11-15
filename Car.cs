@@ -9,8 +9,8 @@ class Car : Vehicle
     private const double MinConsumption = 1;         // km/L, also prevents dividing by zero
     private const double MaxConsumption = 100;      // km/L
 
-    private double averageGasPrice;
-    private double averageConsumption;
+    private double AverageGasPrice;
+    private double AverageConsumption;
 
     // constructor for default values
     public Car() : this(DefaultSpeed, DefaultCO2, DefaultConsumption, DefaultGasPrice)

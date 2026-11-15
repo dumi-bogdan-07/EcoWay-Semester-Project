@@ -10,8 +10,8 @@ class Bus : Vehicle
     private const double CityTripMaxKm = 7;               // max trip length for a city ticket
     private const int PassengersPerBus = 55;              // used to get one person's share of the emissions
 
-    private double cityPrice;
-    private double intercityPrice;
+    private double CityPrice;
+    private double IntercityPrice;
 
     // constructor for default values
     public Bus() : this(DefaultSpeed, DefaultCO2, DefaultCityPrice, DefaultIntercityPrice)
@@ -22,8 +22,8 @@ class Bus : Vehicle
     public Bus(double avgSpeed, double CO2Emission, double cityPrice, double intercityPrice)
     : base("bus", avgSpeed, CO2Emission)
     {
-        this.cityPrice = cityPrice;
-        this.intercityPrice = intercityPrice;
+        this.CityPrice = cityPrice;
+        this.IntercityPrice = intercityPrice;
     }
 
     public override void GetUserValues()
@@ -32,8 +32,8 @@ class Bus : Vehicle
 
         // get everything else needed
         CO2Emission = ExceptionHandler.GetDouble($"Enter bus CO2 emission for the whole bus (kg/km, 0-{MaxCO2}):", 0, MaxCO2);
-        cityPrice = ExceptionHandler.GetDouble($"Enter city ticket price, for trips up to {CityTripMaxKm} km (DKK, 0-{MaxPrice}):", 0, MaxPrice);
-        intercityPrice = ExceptionHandler.GetDouble($"Enter intercity ticket price, for trips over {CityTripMaxKm} km (DKK, 0-{MaxPrice}):", 0, MaxPrice);
+        CityPrice = ExceptionHandler.GetDouble($"Enter city ticket price, for trips up to {CityTripMaxKm} km (DKK, 0-{MaxPrice}):", 0, MaxPrice);
+        IntercityPrice = ExceptionHandler.GetDouble($"Enter intercity ticket price, for trips over {CityTripMaxKm} km (DKK, 0-{MaxPrice}):", 0, MaxPrice);
     }
 
     protected override double CalculateCO2(double km)
@@ -47,8 +47,8 @@ class Bus : Vehicle
         // city ticket for short trips, intercity ticket for longer ones
         if (km <= CityTripMaxKm)
         {
-            return cityPrice;
+            return CityPrice;
         }
-        return intercityPrice;
+        return IntercityPrice;
     }
 }

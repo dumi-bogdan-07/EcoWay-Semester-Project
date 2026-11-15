@@ -8,8 +8,6 @@ namespace Transport.Data{
         public double CO2Emission { get; set; }
         public double AverageConsumption { get; set; }
         public double AverageGasPrice { get; set; }
-        public double BusTicketPriceCity { get; set; }
-        public double BusTicketPriceInterCity {get; set; }
         public double CityPrice { get; set; }
         public double IntercityPrice { get; set; }
         public double TripPrice { get; set; }
