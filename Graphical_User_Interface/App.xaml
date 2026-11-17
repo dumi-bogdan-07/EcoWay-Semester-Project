@@ -1,0 +1,7 @@
+﻿<Application x:Class="FirstSemesterProject.Graphical_User_Interface.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Graphical_User_Interface/MainWindow.xaml">
+    <Application.Resources>
+    </Application.Resources>
+</Application>
