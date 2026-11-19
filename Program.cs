@@ -1,9 +1,16 @@
 ﻿using VehicleClass;
 using Transport.Data;
 using System.Collections.Generic;
+using FirstSemesterProject.Graphical_User_Interface;
 public class Program{
+    
+    [STAThread] // <-- Add this line
     public static void Main(){
         do {
+            var app = new App();
+            app.InitializeComponent();
+            app.Run();
+            
             double distance = RouteInputProcessor.GetValidDistance();
             string[] chosenModes = RouteInputProcessor.GetValidTransportMode();
             string chosenFilter = RouteInputProcessor.GetFilter();

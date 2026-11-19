@@ -1,4 +1,5 @@
 namespace VehicleClass;
+using FirstSemesterProject.Graphical_User_Interface;
 
 class Walk : Vehicle
 {

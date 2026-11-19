@@ -1,11 +1,264 @@
-﻿<Window x:Class="FirstSemesterProject.MainWindow"
+﻿<Window x:Class="FirstSemesterProject.Graphical_User_Interface.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="First Semester Project" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="Hello, this is the foundation of the current GUI 
-        implementation! Knepper dig, for helvede :3"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"/>
-    </Grid>
+        Title="First Semester Project" Height="800" Width="1000">
+    <Grid Background="#F4F7F5">
+    <Grid.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+        <!-- CHANGE 1: TargetType is now CheckBox (was RadioButton) so several can be ticked -->
+        <Style x:Key="TransportCard" TargetType="CheckBox">
+            <Setter Property="Margin" Value="6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border x:Name="Card" Background="White" BorderBrush="#DDE5E0"
+                                BorderThickness="2" CornerRadius="14" Padding="10,14">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="1" Opacity="0.08"/>
+                            </Border.Effect>
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center"/>
+                                <!-- small tick so it's obvious that multi-select is possible -->
+                                <TextBlock x:Name="Tick" Text="✓" FontWeight="Bold" Foreground="#2E9E5B"
+                                           HorizontalAlignment="Right" VerticalAlignment="Top"
+                                           Margin="0,-8,-4,0" Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Card" Property="BorderBrush" Value="#8FD3A8"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Card" Property="Background" Value="#E6F6EC"/>
+                                <Setter TargetName="Card" Property="BorderBrush" Value="#2E9E5B"/>
+                                <Setter TargetName="Tick" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#5B6B62"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+
+        <!-- CHANGE 2: TextBox with a grey hint. The hint text comes from the Tag property -->
+        <Style x:Key="FieldBox" TargetType="TextBox">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Border" Background="White" BorderBrush="#CBD6CF"
+                                BorderThickness="1" CornerRadius="6">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="8,0"
+                                              VerticalAlignment="Center"/>
+                                <TextBlock x:Name="Hint" Text="{TemplateBinding Tag}"
+                                           Foreground="#A3ADA7" FontStyle="Italic"
+                                           Margin="10,0" VerticalAlignment="Center"
+                                           IsHitTestVisible="False" Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- show the hint only while the box is empty -->
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Hint" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#2E9E5B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FieldGroup" TargetType="StackPanel">
+            <Setter Property="Margin" Value="8,0"/>
+        </Style>
+
+        <!-- Shared look for each transport's option card -->
+        <Style x:Key="OptionPanel" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="BorderBrush" Value="#DDE5E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="18,16,18,2"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Header -->
+    <Border Grid.Row="0" Background="#2E9E5B" Padding="24,18">
+        <StackPanel>
+            <TextBlock Text="🌿 EcoWay" FontSize="28" FontWeight="Bold" Foreground="White"/>
+            <TextBlock Text="Compare the footprint of your daily trip" FontSize="13"
+                       Foreground="#D8F3E2" Margin="0,2,0,0"/>
+        </StackPanel>
+    </Border>
+
+    <!-- Transport selection -->
+    <StackPanel Grid.Row="1" Margin="20,18,20,0">
+        <TextBlock Text="Add the distance you are about to undertake and pick 2 to 4 ways to compare" FontSize="16" FontWeight="SemiBold" Foreground="#24332B"/>
+        <TextBlock x:Name="txtSelectionHint" Text="Select at least 2 options, don't forget the distance" FontSize="12"
+                   Foreground="#8A958E" Margin="0,2,0,0"/>
+        <TextBlock Text=" "/>
+        <StackPanel Style="{StaticResource FieldGroup}">
+            <TextBlock Text="Length of journey (km)" Style="{StaticResource FieldLabel}"/>
+            <TextBox x:Name="txtDistance" Tag="Insert a value between 1 and 50 kilometers" Style="{StaticResource FieldBox}"/>
+        </StackPanel>
+        <UniformGrid Columns="4" Margin="-6,8,-6,0">
+            <!-- CHANGE 3: CheckBox, no GroupName, no IsChecked default, shared Checked/Unchecked handler -->
+            <CheckBox x:Name="cbCar" Style="{StaticResource TransportCard}"
+                      Checked="Transport_Changed" Unchecked="Transport_Changed">
+                <StackPanel>
+                    <TextBlock Text="🚗" FontSize="30" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Car" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </CheckBox>
+            <CheckBox x:Name="cbBus" Style="{StaticResource TransportCard}"
+                      Checked="Transport_Changed" Unchecked="Transport_Changed">
+                <StackPanel>
+                    <TextBlock Text="🚌" FontSize="30" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Bus" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </CheckBox>
+            <CheckBox x:Name="cbBike" Style="{StaticResource TransportCard}"
+                      Checked="Transport_Changed" Unchecked="Transport_Changed">
+                <StackPanel>
+                    <TextBlock Text="🚲" FontSize="30" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Bike" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </CheckBox>
+            <CheckBox x:Name="cbWalk" Style="{StaticResource TransportCard}"
+                      Checked="Transport_Changed" Unchecked="Transport_Changed">
+                <StackPanel>
+                    <TextBlock Text="🚶" FontSize="30" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Walking" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                </StackPanel>
+            </CheckBox>
+        </UniformGrid>
+    </StackPanel>
+
+    <!-- CHANGE 4: panels are now stacked vertically (not overlapped) inside a ScrollViewer,
+         so every ticked option shows its own card at the same time -->
+    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="26,16,26,0">
+        <StackPanel>
+
+            <!-- CAR -->
+            <Border Style="{StaticResource OptionPanel}"
+                    Visibility="{Binding IsChecked, ElementName=cbCar, Converter={StaticResource BoolToVis}}">
+                <StackPanel>
+                    <TextBlock Text="🚗 Car" FontSize="15" FontWeight="SemiBold" Foreground="#24332B" Margin="8,0,0,12"/>
+                    <UniformGrid Columns="2">
+                        <StackPanel Style="{StaticResource FieldGroup}">
+                            <TextBlock Text="CO₂ emission (kg/km)" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtCarCo2" Tag="Average: 120" Style="{StaticResource FieldBox}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource FieldGroup}">
+                            <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtCarSpeed" Tag="Average: 50" Style="{StaticResource FieldBox}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource FieldGroup}">
+                            <TextBlock Text="Engine consumption (km/L)" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtCarConsumption" Tag="Average: 6.5" Style="{StaticResource FieldBox}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource FieldGroup}">
+                            <TextBlock Text="Fuel price (per litre)" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtCarFuelPrice" Tag="Average: 13.50" Style="{StaticResource FieldBox}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- BUS -->
+            <Border Style="{StaticResource OptionPanel}"
+                    Visibility="{Binding IsChecked, ElementName=cbBus, Converter={StaticResource BoolToVis}}">
+                <StackPanel>
+                    <TextBlock Text="🚌 Bus" FontSize="15" FontWeight="SemiBold" Foreground="#24332B" Margin="8,0,0,12"/>
+                    <UniformGrid Columns="2">
+                        <StackPanel Style="{StaticResource FieldGroup}">
+                            <TextBlock Text="CO₂ emission (kg/km)" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtBusCo2" Tag="Average: 70" Style="{StaticResource FieldBox}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource FieldGroup}">
+                            <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtBusSpeed" Tag="Average: 30" Style="{StaticResource FieldBox}"/>
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource FieldGroup}">
+                            <TextBlock Text="Ticket price (DKK)" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtBusTicket" Tag="Average: 20" Style="{StaticResource FieldBox}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- BIKE -->
+            <Border Style="{StaticResource OptionPanel}"
+                    Visibility="{Binding IsChecked, ElementName=cbBike, Converter={StaticResource BoolToVis}}">
+                <StackPanel>
+                    <TextBlock Text="🚲 Bike" FontSize="15" FontWeight="SemiBold" Foreground="#24332B" Margin="8,0,0,12"/>
+                    <StackPanel Style="{StaticResource FieldGroup}" HorizontalAlignment="Left" Width="260">
+                        <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="txtBikeSpeed" Tag="Average: 15" Style="{StaticResource FieldBox}"/>
+                    </StackPanel>
+                    <TextBlock Text="🌿 This method does not emit CO₂ gas!" FontSize="13" FontWeight="SemiBold"
+                               Foreground="#2E9E5B" Margin="8,0,0,14"/>
+                </StackPanel>
+            </Border>
+
+            <!-- WALKING -->
+            <Border Style="{StaticResource OptionPanel}"
+                    Visibility="{Binding IsChecked, ElementName=cbWalk, Converter={StaticResource BoolToVis}}">
+                <StackPanel>
+                    <TextBlock Text="🚶 Walking" FontSize="15" FontWeight="SemiBold" Foreground="#24332B" Margin="8,0,0,12"/>
+                    <StackPanel Style="{StaticResource FieldGroup}" HorizontalAlignment="Left" Width="260">
+                        <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
+                        <TextBox x:Name="txtWalkSpeed" Tag="Average: 5" Style="{StaticResource FieldBox}"/>
+                    </StackPanel>
+                    <TextBlock Text="🌿 This method does not emit CO₂ gas!" FontSize="13" FontWeight="SemiBold"
+                               Foreground="#2E9E5B" Margin="8,0,0,14"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+    <!-- CHANGE 5: starts disabled, and gets a dimmed look when disabled -->
+    <Button Grid.Row="3" x:Name="btnCalculate" Content="Calculate my impact" IsEnabled="False"
+            Click="btnCalculate_Click"
+            Margin="26,8,26,22" Height="44" FontSize="15" FontWeight="SemiBold"
+            Foreground="White" Background="#2E9E5B" BorderThickness="0" Cursor="Hand">
+        <Button.Template>
+            <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="10">
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="bd" Property="Background" Value="#26884D"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter TargetName="bd" Property="Opacity" Value="0.4"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Button.Template>
+    </Button>
+</Grid>
 </Window>
