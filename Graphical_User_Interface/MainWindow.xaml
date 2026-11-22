@@ -168,19 +168,19 @@
                     <UniformGrid Columns="2">
                         <StackPanel Style="{StaticResource FieldGroup}">
                             <TextBlock Text="CO₂ emission (kg/km)" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtCarCo2" Tag="Average: 120" Style="{StaticResource FieldBox}"/>
+                            <TextBox x:Name="txtCarCo2" Tag="{Binding Car.CO2Emission, Mode=OneWay, StringFormat='Average: {0}'}"/>
                         </StackPanel>
                         <StackPanel Style="{StaticResource FieldGroup}">
                             <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtCarSpeed" Tag="Average: 50" Style="{StaticResource FieldBox}"/>
+                            <TextBox x:Name="txtCarSpeed" 	Tag="{Binding Car.AvgSpeed, Mode=OneWay, StringFormat='Average: {0}'}"/>
                         </StackPanel>
                         <StackPanel Style="{StaticResource FieldGroup}">
                             <TextBlock Text="Engine consumption (km/L)" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtCarConsumption" Tag="Average: 6.5" Style="{StaticResource FieldBox}"/>
+                            <TextBox x:Name="txtCarConsumption" Tag="{Binding Car.AverageConsumption, Mode=OneWay, StringFormat='Average: {0}'}"/>
                         </StackPanel>
                         <StackPanel Style="{StaticResource FieldGroup}">
                             <TextBlock Text="Fuel price (per litre)" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtCarFuelPrice" Tag="Average: 13.50" Style="{StaticResource FieldBox}"/>
+                            <TextBox x:Name="txtCarFuelPrice" Tag="{Binding Car.AverageConsumption, Mode=OneWay, StringFormat='Average: {0}'}"/>
                         </StackPanel>
                     </UniformGrid>
                 </StackPanel>
@@ -194,15 +194,15 @@
                     <UniformGrid Columns="2">
                         <StackPanel Style="{StaticResource FieldGroup}">
                             <TextBlock Text="CO₂ emission (kg/km)" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtBusCo2" Tag="Average: 70" Style="{StaticResource FieldBox}"/>
+                            <TextBox x:Name="txtBusCo2" Tag="{Binding Bus.CO2Emission, Mode=OneWay, StringFormat='Average: {0}'}"/>
                         </StackPanel>
                         <StackPanel Style="{StaticResource FieldGroup}">
                             <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtBusSpeed" Tag="Average: 30" Style="{StaticResource FieldBox}"/>
+                            <TextBox x:Name="txtBusSpeed" 	Tag="{Binding Bus.AvgSpeed, Mode=OneWay, StringFormat='Average: {0}'}"/>
                         </StackPanel>
                         <StackPanel Style="{StaticResource FieldGroup}">
                             <TextBlock Text="Ticket price (DKK)" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtBusTicket" Tag="Average: 20" Style="{StaticResource FieldBox}"/>
+                            <TextBox x:Name="txtBusTicket" Tag="{Binding Bus.CityPrice, Mode=OneWay, StringFormat='Average: {0}'}"/>
                         </StackPanel>
                     </UniformGrid>
                 </StackPanel>
@@ -215,7 +215,7 @@
                     <TextBlock Text="🚲 Bike" FontSize="15" FontWeight="SemiBold" Foreground="#24332B" Margin="8,0,0,12"/>
                     <StackPanel Style="{StaticResource FieldGroup}" HorizontalAlignment="Left" Width="260">
                         <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
-                        <TextBox x:Name="txtBikeSpeed" Tag="Average: 15" Style="{StaticResource FieldBox}"/>
+                        <TextBox x:Name="txtBikeSpeed" Tag="{Binding Bike.AvgSpeed, Mode=OneWay, StringFormat='Average: {0}'}"/>
                     </StackPanel>
                     <TextBlock Text="🌿 This method does not emit CO₂ gas!" FontSize="13" FontWeight="SemiBold"
                                Foreground="#2E9E5B" Margin="8,0,0,14"/>
@@ -229,7 +229,7 @@
                     <TextBlock Text="🚶 Walking" FontSize="15" FontWeight="SemiBold" Foreground="#24332B" Margin="8,0,0,12"/>
                     <StackPanel Style="{StaticResource FieldGroup}" HorizontalAlignment="Left" Width="260">
                         <TextBlock Text="Speed (km/h)" Style="{StaticResource FieldLabel}"/>
-                        <TextBox x:Name="txtWalkSpeed" Tag="Average: 5" Style="{StaticResource FieldBox}"/>
+                        <TextBox x:Name="txtWalkSpeed" 	Tag="{Binding Walk.AvgSpeed, Mode=OneWay, StringFormat='Average: {0}'}"/>
                     </StackPanel>
                     <TextBlock Text="🌿 This method does not emit CO₂ gas!" FontSize="13" FontWeight="SemiBold"
                                Foreground="#2E9E5B" Margin="8,0,0,14"/>

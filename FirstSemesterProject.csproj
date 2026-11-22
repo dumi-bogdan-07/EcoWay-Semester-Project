@@ -9,8 +9,14 @@
  </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data_Layer\" />
     <Folder Include="Graphical_User_Interface\" />
   </ItemGroup>
-
+    
+<!-- tells the build system to treat DefaultValues.json as a file that must travel with the app -->    
+  <ItemGroup>
+      <None Update="DefaultValues.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+  </ItemGroup>
+    
 </Project>
